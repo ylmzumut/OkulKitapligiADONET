@@ -17,7 +17,7 @@ namespace OkulKitapligiADONET
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormYazarlar());
+            Application.Run(new Form_EventKonusu());
         }
     }
 }
