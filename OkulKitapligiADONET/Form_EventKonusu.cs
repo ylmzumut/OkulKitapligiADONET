@@ -25,7 +25,7 @@ namespace OkulKitapligiADONET
             //Ya çok daha fazla button varsa?
             foreach (var item in this.Controls)
             {
-                if (item is Button && ((Button)sender).Name==((Button)item).Name)
+                if (item is Button && ((Button)sender).Name == ((Button)item).Name)
                 {
                     ((Button)item).BackColor = Color.PaleGoldenrod;
                 }
@@ -60,6 +60,15 @@ namespace OkulKitapligiADONET
                     ((Button)item).MouseLeave += new EventHandler(btn_FareAyrilincaDefaultRengeDonsun);
                 }
             }
+            tabControl1.Click += new EventHandler(TabaTiklandi);
         }
+
+
+        private void TabaTiklandi(object sender, EventArgs e)
+        {
+            MessageBox.Show("tıkladın!!!");
+        }
+
+
     }
 }
