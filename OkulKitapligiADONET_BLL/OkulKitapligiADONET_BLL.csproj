@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="KitapOduncIslemManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\IslemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OkulKitapligiADONET_DAL\OkulKitapligiADONET_DAL.csproj">
@@ -50,5 +51,6 @@
       <Name>OkulKitapligiADONET_DAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

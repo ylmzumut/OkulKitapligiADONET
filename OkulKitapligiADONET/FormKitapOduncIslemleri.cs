@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
+using OkulKitapligiADONET_BLL.ViewModels;
 
 namespace OkulKitapligiADONET
 {
@@ -80,11 +82,32 @@ namespace OkulKitapligiADONET
 
                 if (kontrol)
                 {
-                    MessageBox.Show("INSERT İLE EKLEME YAPILACAK");
+                    string baslangicTarihi = "'" + dateTimePickerBaslangic.Value.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+
+                    string bitisTarihi = "'" + dateTimePickerBitis.Value.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+
+                    Hashtable htVeri = new Hashtable();
+                    htVeri.Add("OgrID",(int)comboBoxOgrenci.SelectedValue);
+                    htVeri.Add("KitapID",(int)comboBoxKitap.SelectedValue);
+                    htVeri.Add("OduncAldigiTarih",baslangicTarihi);
+                    htVeri.Add("OduncBitisTarih",bitisTarihi);
+                    if (kitapOduncIslemManager.OduncKitapKaydiniYap("Islemler",htVeri))
+                    {
+                        MessageBox.Show("Ödünç alma işleminiz başarıyl kayıt edilmiştir.");
+                        //temizlik
+                        GridViewiAyarlaveDoldur();
+                        OgrenciGroupBoxTemizle();
+                        KitapGroupBoxPasifYap();
+                        OduncTarihGroupBoxPasifYap();
+                    }
+                    else
+                    {
+                        MessageBox.Show("HATA: Kayıt eklenirken beklenmedik bir hata oluştu!");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("HATA: Kitap stokta olmadığı");
+                    MessageBox.Show("HATA: Kitap stokta olmadığı için ödünç alamazsınız...");
                 }
             }
             catch (Exception ex)
@@ -98,13 +121,30 @@ namespace OkulKitapligiADONET
         {
             dataGridViewOduncKitaplar.MultiSelect = false;
             dataGridViewOduncKitaplar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewOduncKitaplar.DataSource = kitapOduncIslemManager.GrideVerileriGetir();
-            dataGridViewOduncKitaplar.Columns["IslemID"].Visible = false;
-            //foreach (var item in dataGridViewOduncKitaplar.Columns)
-            //{
-            //    dataGridViewOduncKitaplar.Columns[item].Width = 150;
-            //}
 
+            //
+            //dataGridViewOduncKitaplar.DataSource = kitapOduncIslemManager.GrideVerileriGetir();
+            //dataGridViewOduncKitaplar.Columns["IslemID"].Visible = false;
+            //dataGridViewOduncKitaplar.Columns["KitapID"].Visible = false;
+
+            //datagridview'in dataSource'una veriler viewmodel ile geldi.
+            List<IslemViewModel> list = kitapOduncIslemManager.GrideVerileriViewModelleGetir();
+            dataGridViewOduncKitaplar.DataSource = list;
+            dataGridViewOduncKitaplar.Columns["IslemID"].Visible = false;
+            dataGridViewOduncKitaplar.Columns["KitapID"].Visible = false;
+            dataGridViewOduncKitaplar.Columns["OgrID"].Visible = false;
+            dataGridViewOduncKitaplar.Columns["TeslimEdildiMi"].Visible = false;
+            dataGridViewOduncKitaplar.Columns["TeslimEdildiMiString"].HeaderText = "Teslim Durumu";
+            dataGridViewOduncKitaplar.Columns["OgrenciAdSoyad"].HeaderText = "Öğrenci Ad-Soyad";
+            dataGridViewOduncKitaplar.Columns["OduncAldigiTarih"].HeaderText = "Ödünç Baş. Tarih";
+            dataGridViewOduncKitaplar.Columns["OduncBitisTarih"].HeaderText = "Ödünç Bitiş Tarih";
+
+
+            for (int i=0;i<dataGridViewOduncKitaplar.Columns.Count;i++)
+            {
+                dataGridViewOduncKitaplar.Columns[i].Width = 160;
+            }
+            dataGridViewOduncKitaplar.ContextMenuStrip = contextMenuStrip1;
         }
 
         private void TumKitaplariCombayaGetir()
@@ -177,6 +217,42 @@ namespace OkulKitapligiADONET
             dateTimePickerBitis.Value = dateTimePickerBaslangic.Value.AddDays(1);
             dateTimePickerBitis.MaxDate = dateTimePickerBaslangic.Value.AddMonths(3);
 
+        }
+
+        private void kitabiTeslimEtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //veri tabanına aşağıdaki sorgu ile yeni alan eklendi
+            //alter table Islemler
+            //add TeslimEdildiMi bit not null default 0
+            try
+            {
+                //datagridview'de seçilen satır alınacak
+                //o satırdaki islemID ve kitapID alınacak
+                DataGridViewRow secilenSatir = dataGridViewOduncKitaplar.SelectedRows[0];
+                //islemID
+                int islemID = (int)secilenSatir.Cells["IslemID"].Value;
+                //kitapID
+                int kitapID = (int)secilenSatir.Cells["KitapID"].Value;
+                bool teslimSonuc = false;
+                teslimSonuc = kitapOduncIslemManager.OduncKitapTeslimEt("Islemler", islemID, kitapID);
+                if (teslimSonuc)
+                {
+                    MessageBox.Show("Teşekkürler... Kitap teslim alındı...");
+                    //temizlik
+                    GridViewiAyarlaveDoldur();
+                    OgrenciGroupBoxTemizle();
+                    KitapGroupBoxPasifYap();
+                    OduncTarihGroupBoxPasifYap();
+                }
+                else
+                {
+                    MessageBox.Show("HATA: Kitap teslim edilemedi!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("HATA: Bir hata oluştu! "+ex.Message+" "+ex.ToString());
+            }
         }
     }
 }

@@ -385,9 +385,13 @@ namespace OkulKitapligiADONET
                 int sonuc = komut.ExecuteNonQuery();
                 if (sonuc > 0)
                 {
-                    MessageBox.Show($"{comboBoxKitapGuncelle.SelectedItem}'a ait bilgiler  güncellendi!");
+                    DataRowView data = comboBoxKitapGuncelle.SelectedItem as DataRowView;
+                    string eskiKitapAdi = data.Row.ItemArray[2].ToString();
+                    MessageBox.Show($"{eskiKitapAdi} isimli ait bilgiler güncellendi!");
                     GuncelleSayfasidakiGroupBoxIciniTemizle();
                     comboBoxKitapGuncelle.SelectedIndex = -1;
+                    TumKitaplariComboBoxaGetir();
+                    TumKitaplariViewileGrideGetir();
                 }
                 else
                 {
@@ -522,6 +526,11 @@ namespace OkulKitapligiADONET
 
                 MessageBox.Show("HATA: Beklenmedik hata oluştu. "+ex.Message);
             }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

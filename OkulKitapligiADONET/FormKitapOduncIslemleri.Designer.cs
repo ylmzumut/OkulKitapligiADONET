@@ -29,6 +29,7 @@ namespace OkulKitapligiADONET
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.comboBoxOgrenci = new System.Windows.Forms.ComboBox();
             this.comboBoxKitap = new System.Windows.Forms.ComboBox();
             this.groupBoxOgrenci = new System.Windows.Forms.GroupBox();
@@ -40,16 +41,19 @@ namespace OkulKitapligiADONET
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewOduncKitaplar = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.kitabiTeslimEtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxOgrenci.SuspendLayout();
             this.groupBoxKitap.SuspendLayout();
             this.groupBoxOduncTarihler.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOduncKitaplar)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxOgrenci
             // 
             this.comboBoxOgrenci.FormattingEnabled = true;
-            this.comboBoxOgrenci.Location = new System.Drawing.Point(6, 47);
+            this.comboBoxOgrenci.Location = new System.Drawing.Point(19, 48);
             this.comboBoxOgrenci.Name = "comboBoxOgrenci";
             this.comboBoxOgrenci.Size = new System.Drawing.Size(356, 28);
             this.comboBoxOgrenci.TabIndex = 0;
@@ -59,7 +63,7 @@ namespace OkulKitapligiADONET
             // comboBoxKitap
             // 
             this.comboBoxKitap.FormattingEnabled = true;
-            this.comboBoxKitap.Location = new System.Drawing.Point(6, 44);
+            this.comboBoxKitap.Location = new System.Drawing.Point(19, 44);
             this.comboBoxKitap.Name = "comboBoxKitap";
             this.comboBoxKitap.Size = new System.Drawing.Size(356, 28);
             this.comboBoxKitap.TabIndex = 1;
@@ -71,7 +75,7 @@ namespace OkulKitapligiADONET
             this.groupBoxOgrenci.Controls.Add(this.comboBoxOgrenci);
             this.groupBoxOgrenci.Location = new System.Drawing.Point(30, 44);
             this.groupBoxOgrenci.Name = "groupBoxOgrenci";
-            this.groupBoxOgrenci.Size = new System.Drawing.Size(368, 107);
+            this.groupBoxOgrenci.Size = new System.Drawing.Size(399, 107);
             this.groupBoxOgrenci.TabIndex = 2;
             this.groupBoxOgrenci.TabStop = false;
             this.groupBoxOgrenci.Text = "Öğrenci";
@@ -81,7 +85,7 @@ namespace OkulKitapligiADONET
             this.groupBoxKitap.Controls.Add(this.comboBoxKitap);
             this.groupBoxKitap.Location = new System.Drawing.Point(30, 180);
             this.groupBoxKitap.Name = "groupBoxKitap";
-            this.groupBoxKitap.Size = new System.Drawing.Size(368, 107);
+            this.groupBoxKitap.Size = new System.Drawing.Size(399, 107);
             this.groupBoxKitap.TabIndex = 3;
             this.groupBoxKitap.TabStop = false;
             this.groupBoxKitap.Text = "Kitap";
@@ -93,9 +97,9 @@ namespace OkulKitapligiADONET
             this.groupBoxOduncTarihler.Controls.Add(this.UC_MyButtonOduncAl);
             this.groupBoxOduncTarihler.Controls.Add(this.label2);
             this.groupBoxOduncTarihler.Controls.Add(this.label1);
-            this.groupBoxOduncTarihler.Location = new System.Drawing.Point(414, 44);
+            this.groupBoxOduncTarihler.Location = new System.Drawing.Point(455, 44);
             this.groupBoxOduncTarihler.Name = "groupBoxOduncTarihler";
-            this.groupBoxOduncTarihler.Size = new System.Drawing.Size(356, 243);
+            this.groupBoxOduncTarihler.Size = new System.Drawing.Size(375, 243);
             this.groupBoxOduncTarihler.TabIndex = 4;
             this.groupBoxOduncTarihler.TabStop = false;
             this.groupBoxOduncTarihler.Text = "Tarih seçiniz...";
@@ -153,15 +157,30 @@ namespace OkulKitapligiADONET
             this.dataGridViewOduncKitaplar.ReadOnly = true;
             this.dataGridViewOduncKitaplar.RowHeadersWidth = 51;
             this.dataGridViewOduncKitaplar.RowTemplate.Height = 29;
-            this.dataGridViewOduncKitaplar.Size = new System.Drawing.Size(740, 254);
+            this.dataGridViewOduncKitaplar.Size = new System.Drawing.Size(800, 254);
             this.dataGridViewOduncKitaplar.TabIndex = 5;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kitabiTeslimEtToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 28);
+            // 
+            // kitabiTeslimEtToolStripMenuItem
+            // 
+            this.kitabiTeslimEtToolStripMenuItem.Name = "kitabiTeslimEtToolStripMenuItem";
+            this.kitabiTeslimEtToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.kitabiTeslimEtToolStripMenuItem.Text = "Kitabı Teslim Et";
+            this.kitabiTeslimEtToolStripMenuItem.Click += new System.EventHandler(this.kitabiTeslimEtToolStripMenuItem_Click);
             // 
             // FormKitapOduncIslemleri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(790, 584);
+            this.ClientSize = new System.Drawing.Size(860, 584);
             this.Controls.Add(this.dataGridViewOduncKitaplar);
             this.Controls.Add(this.groupBoxOduncTarihler);
             this.Controls.Add(this.groupBoxKitap);
@@ -174,6 +193,7 @@ namespace OkulKitapligiADONET
             this.groupBoxOduncTarihler.ResumeLayout(false);
             this.groupBoxOduncTarihler.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOduncKitaplar)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -190,5 +210,7 @@ namespace OkulKitapligiADONET
         public System.Windows.Forms.GroupBox groupBoxOgrenci;
         public System.Windows.Forms.GroupBox groupBoxKitap;
         public System.Windows.Forms.GroupBox groupBoxOduncTarihler;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem kitabiTeslimEtToolStripMenuItem;
     }
 }
