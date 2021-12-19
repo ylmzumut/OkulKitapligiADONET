@@ -26,7 +26,7 @@ namespace OkulKitapligiADONET
 
 
         SqlConnection baglanti = new SqlConnection();
-        string SQLBaglantiCumlesi = @"Server=DESKTOP-TUMHS1A;Database=OKULKITAPLIGI;Trusted_Connection=True;";
+        string SQLBaglantiCumlesi = @"Server=.;Database=OkulKutuphanesi;Trusted_Connection=True;";
 
         private void FormYazarlar_Load(object sender, EventArgs e)
         {

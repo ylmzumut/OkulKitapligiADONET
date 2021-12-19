@@ -14,7 +14,7 @@ namespace OkulKitapligiADONET_BLL.ViewModels
         public int KitapID { get; set; }
         public int OgrID { get; set; }
         public DateTime OduncAldigiTarih { get; set; }
-        public DateTime OduncBitisTarih { get; set; }
+        public DateTime OduncBitisTarihi { get; set; }
         public bool TeslimEdildiMi { get; set; }
 
         private string _teslimEdildiMiString = "";

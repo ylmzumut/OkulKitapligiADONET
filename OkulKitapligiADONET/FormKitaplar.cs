@@ -18,7 +18,7 @@ namespace OkulKitapligiADONET
             InitializeComponent();
         }
         //Global alan
-        string SQLBaglantiCumlesi = @"Server=DESKTOP-TUMHS1A;Database=OKULKITAPLIGI;Trusted_Connection=True;";
+        string SQLBaglantiCumlesi = @"Server=.;Database=OkulKutuphanesi;Trusted_Connection=True;";
         SqlConnection baglanti = new SqlConnection();
 
         private void FormKitaplar_Load(object sender, EventArgs e)

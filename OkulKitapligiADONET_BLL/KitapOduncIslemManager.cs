@@ -12,7 +12,7 @@ namespace OkulKitapligiADONET_BLL
 {
     public class KitapOduncIslemManager
     {
-        MyPocketDAL myPocketDAL = new MyPocketDAL("DESKTOP-TUMHS1A", "OKULKITAPLIGI", "", "");
+        MyPocketDAL myPocketDAL = new MyPocketDAL(".", "OkulKutuphanesi", "", "");
 
         public DataTable TumKitaplariGetir()
         {
@@ -45,7 +45,7 @@ namespace OkulKitapligiADONET_BLL
             try
             {
                 DataTable data = new DataTable();
-                data = myPocketDAL.GetTheData("select i.IslemID, i.KitapID, CONCAT(o.OgrAd,' ',o.OgrSoyad) as OgrenciAdSoyad, k.KitapAdi, i.OduncAldigiTarih, i.OduncBitisTarih from Islemler i inner join Kitaplar k on k.KitapID = i.KitapID inner join Ogrenciler o on o.OgrID = i.OgrID");
+                data = myPocketDAL.GetTheData("select i.IslemID, i.KitapID, CONCAT(o.OgrAd,' ',o.OgrSoyad) as OgrenciAdSoyad, k.KitapAdi, i.OduncAldigiTarih, i.OduncBitisTarihi from Islemler i inner join Kitaplar k on k.KitapID = i.KitapID inner join Ogrenciler o on o.OgrID = i.OgrID");
                 return data;
             }
             catch (Exception ex)
@@ -59,7 +59,7 @@ namespace OkulKitapligiADONET_BLL
             try
             {
                 DataTable theData = new DataTable();
-                theData = myPocketDAL.GetTheData("select i.IslemID, k.KitapID, o.OgrID, CONCAT(o.OgrAd, ' ', o.OgrSoyad) as OgrenciAdSoyad, k.KitapAdi, i.OduncAldigiTarih, i.OduncBitisTarih, i.TeslimEdildiMi from  Islemler i inner join Kitaplar k on k.KitapID = i.KitapID inner join Ogrenciler o on o.OgrID = i.OgrID");
+                theData = myPocketDAL.GetTheData("select i.IslemID, k.KitapID, o.OgrID, CONCAT(o.OgrAd, ' ', o.OgrSoyad) as OgrenciAdSoyad, k.KitapAdi, i.OduncAldigiTarih, i.OduncBitisTarihi, i.TeslimEdildiMi from  Islemler i inner join Kitaplar k on k.KitapID = i.KitapID inner join Ogrenciler o on o.OgrID = i.OgrID");
 
                 //veriler dataTable ile geldi. Ama ben o verileri tek tek döngü ile dönerken içindeki verileri viewmodelime aktaracağım.
                 for (int i = 0; i < theData.Rows.Count; i++)
@@ -73,7 +73,7 @@ namespace OkulKitapligiADONET_BLL
                         OgrenciAdSoyad = theData.Rows[i].ItemArray[3].ToString(),
                         KitapAdi = theData.Rows[i].ItemArray[4].ToString(),
                         OduncAldigiTarih=Convert.ToDateTime(theData.Rows[i].ItemArray[5]),
-                        OduncBitisTarih = Convert.ToDateTime(theData.Rows[i].ItemArray[6]),
+                        OduncBitisTarihi = Convert.ToDateTime(theData.Rows[i].ItemArray[6]),
                         TeslimEdildiMi = (bool)theData.Rows[i].ItemArray[7]
                     };
                     //IslemViewModel tipindeki veri isimli nesne IslemViewModel tipine sahip listeye eklenecek
